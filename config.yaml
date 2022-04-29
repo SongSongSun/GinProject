@@ -1,0 +1,65 @@
+# zap logger configuration
+zap:
+  level: 'debug'
+  format: 'console'
+  prefix: '[song]'
+  director: 'log'
+  show-line: true
+  encode-level: 'LowercaseColorLevelEncoder'
+  stacktrace-key: 'stacktrace'
+  log-in-console: true
+
+# system configuration
+system:
+  env: 'public'  # Change to "develop" to skip authentication for development mode
+  port: '8888'
+  db-type: 'mysql'
+
+# mysql connect configuration
+# 未初始化之前请勿手动修改数据库信息！！！如果一定要手动初始化请看（https://www.github.com/flipped-aurora/gin-vue-admin/server.com/docs/first）
+mysql:
+  ip: 'localhost'
+  port: '3306'
+  config: 'charset=utf8mb4&parseTime=True&loc=Local'
+  db-name: 'ginStudy'
+  username: 'root'
+  password: '12345678'
+  max-idle-conns: 10
+  max-open-conns: 100
+  log-mode: ""
+  log-zap: false
+
+# autocode configuration
+autocode:
+  transfer-restart: true
+  # root 自动适配项目根目录
+  # 请不要手动配置,他会在项目加载的时候识别出根路径
+  root: ""
+  server: /server
+  server-plug: /plugin/%s
+  server-api: /api/v1/%s
+  server-initialize: /initialize
+  server-model: /model/%s
+  server-request: /model/%s/request/
+  server-router: /router/%s
+  server-service: /service/%s
+  web: /web/src
+  web-api: /api
+  web-form: /view
+  web-table: /view
+
+# 跨域配置
+# 需要配合 server/initialize/router.go#L32 使用
+cors:
+  mode: whitelist # 放行模式: allow-all, 放行全部; whitelist, 白名单模式, 来自白名单内域名的请求添加 cors 头; strict-whitelist 严格白名单模式, 白名单外的请求一律拒绝
+  whitelist:
+    - allow-origin: example1.com
+      allow-headers: content-type
+      allow-methods: GET, POST
+      expose-headers: Content-Length, Access-Control-Allow-Origin, Access-Control-Allow-Headers, Content-Type
+      allow-credentials: true # 布尔值
+    - allow-origin: example2.com
+      allow-headers: content-type
+      allow-methods: GET, POST
+      expose-headers: Content-Length, Access-Control-Allow-Origin, Access-Control-Allow-Headers, Content-Type
+      allow-credentials: true # 布尔值
